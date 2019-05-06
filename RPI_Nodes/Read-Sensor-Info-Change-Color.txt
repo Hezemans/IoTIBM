@@ -1,0 +1,201 @@
+[
+    {
+        "id": "c313cdd0.be2ec8",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "25c369e6.35f626",
+        "type": "ibmiot in",
+        "z": "c313cdd0.be2ec8",
+        "authentication": "apiKey",
+        "apiKey": "5c13f417.02dc7c",
+        "inputType": "evt",
+        "logicalInterface": "",
+        "ruleId": "",
+        "deviceId": "",
+        "applicationId": "",
+        "deviceType": "+",
+        "eventType": "Sensor1",
+        "commandType": "",
+        "format": "json",
+        "name": "Sensor",
+        "service": "registered",
+        "allDevices": true,
+        "allApplications": "",
+        "allDeviceTypes": true,
+        "allLogicalInterfaces": "",
+        "allEvents": true,
+        "allCommands": "",
+        "allFormats": true,
+        "qos": 0,
+        "x": 110,
+        "y": 140,
+        "wires": [
+            [
+                "d2e2e098.4afca",
+                "fa50b1b4.6a396"
+            ]
+        ]
+    },
+    {
+        "id": "fa50b1b4.6a396",
+        "type": "switch",
+        "z": "c313cdd0.be2ec8",
+        "name": "Comprobamos",
+        "property": "payload.d.Temp",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gte",
+                "v": "23.4",
+                "vt": "str"
+            },
+            {
+                "t": "lt",
+                "v": "23.4",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 480,
+        "y": 140,
+        "wires": [
+            [
+                "70a9c077.d7509"
+            ],
+            [
+                "a5586ac0.c1b8"
+            ]
+        ]
+    },
+    {
+        "id": "70a9c077.d7509",
+        "type": "template",
+        "z": "c313cdd0.be2ec8",
+        "name": "Rojo",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\n    \"on\":true,\n    \"sat\":254,\n    \"bri\":254,\n    \"hue\":65000\n}\n\n",
+        "output": "str",
+        "x": 690,
+        "y": 80,
+        "wires": [
+            [
+                "619ba4fb.581bac",
+                "7317be4b.13a6b"
+            ]
+        ]
+    },
+    {
+        "id": "a5586ac0.c1b8",
+        "type": "template",
+        "z": "c313cdd0.be2ec8",
+        "name": "Azul",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\n    \"on\":true,\n    \"sat\":254,\n    \"bri\":254,\n    \"hue\":40000\n}",
+        "output": "str",
+        "x": 690,
+        "y": 180,
+        "wires": [
+            [
+                "aa76a652.1389b8",
+                "7317be4b.13a6b"
+            ]
+        ]
+    },
+    {
+        "id": "d2e2e098.4afca",
+        "type": "debug",
+        "z": "c313cdd0.be2ec8",
+        "name": "salida de la nube",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 300,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "7317be4b.13a6b",
+        "type": "ibmiot out",
+        "z": "c313cdd0.be2ec8",
+        "authentication": "apiKey",
+        "apiKey": "5c13f417.02dc7c",
+        "outputType": "evt",
+        "deviceId": "rpi1",
+        "deviceType": "raspberry",
+        "eventCommandType": "ON",
+        "format": "json",
+        "data": "data",
+        "qos": 0,
+        "name": "ON",
+        "service": "registered",
+        "x": 870,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "aa76a652.1389b8",
+        "type": "debug",
+        "z": "c313cdd0.be2ec8",
+        "name": "salida azul",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 750,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "619ba4fb.581bac",
+        "type": "debug",
+        "z": "c313cdd0.be2ec8",
+        "name": "salida rojo",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 920,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "18ec5ad2.bc8a55",
+        "type": "comment",
+        "z": "c313cdd0.be2ec8",
+        "name": "",
+        "info": "sudo bluetoothctl\n",
+        "x": 180,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "5c13f417.02dc7c",
+        "type": "ibmiot",
+        "z": "",
+        "name": "EHnDuXUim-yjvtrq+v",
+        "keepalive": "60",
+        "serverName": "y674zp.messaging.internetofthings.ibmcloud.com",
+        "cleansession": true,
+        "appId": "",
+        "shared": false
+    }
+]
