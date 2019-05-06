@@ -1,0 +1,485 @@
+[
+    {
+        "id": "1733c3ee.9cf73c",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "3f5f4bd9.0c8014",
+        "type": "inject",
+        "z": "1733c3ee.9cf73c",
+        "name": "ON",
+        "topic": "",
+        "payload": "{\"on\":true, \"sat\":254, \"bri\":254,\"hue\":24790}",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "x": 410,
+        "y": 40,
+        "wires": [
+            [
+                "9b102452.4cb298"
+            ]
+        ]
+    },
+    {
+        "id": "9b102452.4cb298",
+        "type": "http request",
+        "z": "1733c3ee.9cf73c",
+        "name": "LED stripe requesti",
+        "method": "PUT",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "http://192.168.1.149/api/yB5Wh1VnEFvTHesWJ5WbfqTGB5UmFRoqrAH-JbZK/lights/5/state",
+        "tls": "",
+        "proxy": "",
+        "x": 769,
+        "y": 121,
+        "wires": [
+            [
+                "53b955f0.99176c"
+            ]
+        ]
+    },
+    {
+        "id": "53b955f0.99176c",
+        "type": "debug",
+        "z": "1733c3ee.9cf73c",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "false",
+        "x": 1030,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "6a014a3c.0c5a64",
+        "type": "debug",
+        "z": "1733c3ee.9cf73c",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "true",
+        "x": 550,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "5c178224.cfb62c",
+        "type": "http request",
+        "z": "1733c3ee.9cf73c",
+        "name": "Get all lights",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "http://192.168.1.149/api/yB5Wh1VnEFvTHesWJ5WbfqTGB5UmFRoqrAH-JbZK/lights/",
+        "tls": "",
+        "proxy": "",
+        "x": 530,
+        "y": 340,
+        "wires": [
+            [
+                "53b955f0.99176c",
+                "4fb10788.4917a8"
+            ]
+        ]
+    },
+    {
+        "id": "b2329940.369838",
+        "type": "inject",
+        "z": "1733c3ee.9cf73c",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "x": 140,
+        "y": 340,
+        "wires": [
+            [
+                "5c178224.cfb62c"
+            ]
+        ]
+    },
+    {
+        "id": "1b8a5c32.3f7a44",
+        "type": "http in",
+        "z": "1733c3ee.9cf73c",
+        "name": "",
+        "url": "/availableLights",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 289,
+        "y": 539,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "771077bb.a75fc8",
+        "type": "http response",
+        "z": "1733c3ee.9cf73c",
+        "name": "http response",
+        "statusCode": "",
+        "headers": {},
+        "x": 806,
+        "y": 517,
+        "wires": []
+    },
+    {
+        "id": "92905ffc.81f3e",
+        "type": "function",
+        "z": "1733c3ee.9cf73c",
+        "name": "",
+        "func": "msg.lightid = msg.payload.id;\ndelete msg.payload.id;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 550,
+        "y": 160,
+        "wires": [
+            [
+                "9b102452.4cb298"
+            ]
+        ]
+    },
+    {
+        "id": "90c5da56.81bac8",
+        "type": "http request",
+        "z": "1733c3ee.9cf73c",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "http://192.168.1.149/api/yB5Wh1VnEFvTHesWJ5WbfqTGB5UmFRoqrAH-JbZK/lights/{{lightid}}",
+        "tls": "",
+        "proxy": "",
+        "x": 590,
+        "y": 660,
+        "wires": [
+            [
+                "329caa38.ce13a6",
+                "28ad9a90.e326a6"
+            ]
+        ]
+    },
+    {
+        "id": "70a1397d.420fb8",
+        "type": "function",
+        "z": "1733c3ee.9cf73c",
+        "name": "",
+        "func": "msg.lightid = msg.payload.id;\ndelete msg.payload.id;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 430,
+        "y": 660,
+        "wires": [
+            [
+                "90c5da56.81bac8"
+            ]
+        ]
+    },
+    {
+        "id": "329caa38.ce13a6",
+        "type": "debug",
+        "z": "1733c3ee.9cf73c",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "false",
+        "x": 970,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "7b474ce3.80db24",
+        "type": "debug",
+        "z": "1733c3ee.9cf73c",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 326,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "61942973.269c58",
+        "type": "inject",
+        "z": "1733c3ee.9cf73c",
+        "name": "OFF",
+        "topic": "",
+        "payload": "{\"on\":false, \"sat\":254, \"bri\":254,\"hue\":10000}",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "x": 590,
+        "y": 40,
+        "wires": [
+            [
+                "9b102452.4cb298"
+            ]
+        ]
+    },
+    {
+        "id": "58a42c65.5301c4",
+        "type": "ibmiot in",
+        "z": "1733c3ee.9cf73c",
+        "authentication": "apiKey",
+        "apiKey": "5c13f417.02dc7c",
+        "inputType": "evt",
+        "logicalInterface": "",
+        "ruleId": "",
+        "deviceId": "rpi1",
+        "applicationId": "",
+        "deviceType": "raspberry",
+        "eventType": "+",
+        "commandType": "",
+        "format": "json",
+        "name": "all commands",
+        "service": "registered",
+        "allDevices": "",
+        "allApplications": "",
+        "allDeviceTypes": false,
+        "allLogicalInterfaces": "",
+        "allEvents": true,
+        "allCommands": "",
+        "allFormats": "",
+        "qos": 0,
+        "x": 130,
+        "y": 120,
+        "wires": [
+            [
+                "7b474ce3.80db24"
+            ]
+        ]
+    },
+    {
+        "id": "2a4d83f2.08f6bc",
+        "type": "ibmiot in",
+        "z": "1733c3ee.9cf73c",
+        "authentication": "apiKey",
+        "apiKey": "5c13f417.02dc7c",
+        "inputType": "cmd",
+        "logicalInterface": "",
+        "ruleId": "",
+        "deviceId": "rpi1",
+        "applicationId": "",
+        "deviceType": "raspberry",
+        "eventType": "+",
+        "commandType": "LEDStripeCommand",
+        "format": "json",
+        "name": "LED Stripe Command",
+        "service": "registered",
+        "allDevices": "",
+        "allApplications": "",
+        "allDeviceTypes": false,
+        "allLogicalInterfaces": "",
+        "allEvents": true,
+        "allCommands": "",
+        "allFormats": "",
+        "qos": 0,
+        "x": 160,
+        "y": 180,
+        "wires": [
+            [
+                "6a014a3c.0c5a64",
+                "92905ffc.81f3e"
+            ]
+        ]
+    },
+    {
+        "id": "eb1128a9.13a8a8",
+        "type": "ibmiot in",
+        "z": "1733c3ee.9cf73c",
+        "authentication": "apiKey",
+        "apiKey": "5c13f417.02dc7c",
+        "inputType": "cmd",
+        "logicalInterface": "",
+        "ruleId": "",
+        "deviceId": "rpi1",
+        "applicationId": "",
+        "deviceType": "raspberry",
+        "eventType": "+",
+        "commandType": "Get available lights command",
+        "format": "json",
+        "name": "Get available lights command",
+        "service": "registered",
+        "allDevices": "",
+        "allApplications": "",
+        "allDeviceTypes": false,
+        "allLogicalInterfaces": "",
+        "allEvents": true,
+        "allCommands": "",
+        "allFormats": "",
+        "qos": 0,
+        "x": 180,
+        "y": 380,
+        "wires": [
+            [
+                "5c178224.cfb62c"
+            ]
+        ]
+    },
+    {
+        "id": "d4a5a88f.140758",
+        "type": "ibmiot in",
+        "z": "1733c3ee.9cf73c",
+        "authentication": "apiKey",
+        "apiKey": "5c13f417.02dc7c",
+        "inputType": "cmd",
+        "logicalInterface": "",
+        "ruleId": "",
+        "deviceId": "rpi1",
+        "applicationId": "",
+        "deviceType": "raspberry",
+        "eventType": "+",
+        "commandType": "getState",
+        "format": "json",
+        "name": "Get light state command",
+        "service": "registered",
+        "allDevices": "",
+        "allApplications": "",
+        "allDeviceTypes": false,
+        "allLogicalInterfaces": "",
+        "allEvents": true,
+        "allCommands": "",
+        "allFormats": "",
+        "qos": 0,
+        "x": 190,
+        "y": 600,
+        "wires": [
+            [
+                "70a1397d.420fb8",
+                "329caa38.ce13a6"
+            ]
+        ]
+    },
+    {
+        "id": "4fb10788.4917a8",
+        "type": "ibmiot out",
+        "z": "1733c3ee.9cf73c",
+        "authentication": "apiKey",
+        "apiKey": "5c13f417.02dc7c",
+        "outputType": "evt",
+        "deviceId": "rpi1",
+        "deviceType": "raspberry",
+        "eventCommandType": "getLights",
+        "format": "json",
+        "data": "all light state",
+        "qos": 0,
+        "name": "Send available lights to cloud",
+        "service": "registered",
+        "x": 970,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "28ad9a90.e326a6",
+        "type": "ibmiot out",
+        "z": "1733c3ee.9cf73c",
+        "authentication": "apiKey",
+        "apiKey": "5c13f417.02dc7c",
+        "outputType": "evt",
+        "deviceId": "rpi1",
+        "deviceType": "raspberry",
+        "eventCommandType": "getState",
+        "format": "json",
+        "data": "getState",
+        "qos": 0,
+        "name": "getState",
+        "service": "registered",
+        "x": 960,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "8f8765a3.3cad08",
+        "type": "ibmiot in",
+        "z": "1733c3ee.9cf73c",
+        "authentication": "apiKey",
+        "apiKey": "5c13f417.02dc7c",
+        "inputType": "evt",
+        "logicalInterface": "",
+        "ruleId": "",
+        "deviceId": "",
+        "applicationId": "",
+        "deviceType": "+",
+        "eventType": "ON",
+        "commandType": "",
+        "format": "json",
+        "name": "ON",
+        "service": "registered",
+        "allDevices": true,
+        "allApplications": "",
+        "allDeviceTypes": true,
+        "allLogicalInterfaces": "",
+        "allEvents": "",
+        "allCommands": "",
+        "allFormats": "",
+        "qos": 0,
+        "x": 230,
+        "y": 40,
+        "wires": [
+            [
+                "9b102452.4cb298"
+            ]
+        ]
+    },
+    {
+        "id": "51da2bb3.a2b234",
+        "type": "ibmiot in",
+        "z": "1733c3ee.9cf73c",
+        "authentication": "apiKey",
+        "apiKey": "5c13f417.02dc7c",
+        "inputType": "evt",
+        "logicalInterface": "",
+        "ruleId": "",
+        "deviceId": "",
+        "applicationId": "",
+        "deviceType": "+",
+        "eventType": "OFF",
+        "commandType": "",
+        "format": "json",
+        "name": "OFF",
+        "service": "registered",
+        "allDevices": true,
+        "allApplications": "",
+        "allDeviceTypes": true,
+        "allLogicalInterfaces": "",
+        "allEvents": "",
+        "allCommands": "",
+        "allFormats": "",
+        "qos": 0,
+        "x": 730,
+        "y": 40,
+        "wires": [
+            [
+                "9b102452.4cb298"
+            ]
+        ]
+    },
+    {
+        "id": "5c13f417.02dc7c",
+        "type": "ibmiot",
+        "z": "",
+        "name": "EHnDuXUim-yjvtrq+v",
+        "keepalive": "60",
+        "serverName": "y674zp.messaging.internetofthings.ibmcloud.com",
+        "cleansession": true,
+        "appId": "",
+        "shared": false
+    }
+]
