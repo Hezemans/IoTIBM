@@ -10,7 +10,7 @@
         "timer": "",
         "oldrc": false,
         "name": "take picture",
-        "x": 610,
+        "x": 430,
         "y": 380,
         "wires": [
             [
@@ -35,8 +35,8 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": false,
-        "x": 360,
-        "y": 460,
+        "x": 680,
+        "y": 360,
         "wires": [
             [
                 "bfdead93.7df73"
@@ -51,8 +51,8 @@
         "filename": "/var/www/html/fotos/alle.jpg",
         "format": "",
         "sendError": true,
-        "x": 570,
-        "y": 460,
+        "x": 430,
+        "y": 440,
         "wires": [
             [
                 "52629e97.df1"
@@ -68,12 +68,11 @@
         "method": "get",
         "upload": false,
         "swaggerDoc": "",
-        "x": 240,
-        "y": 180,
+        "x": 140,
+        "y": 300,
         "wires": [
             [
                 "377abd25.848022",
-                "c9857d05.acaf8",
                 "a2d28233.d6f9a8"
             ]
         ]
@@ -85,7 +84,7 @@
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 950,
+        "x": 890,
         "y": 380,
         "wires": []
     },
@@ -97,8 +96,8 @@
         "vr-service-endpoint": "https://gateway.watsonplatform.net/visual-recognition/api",
         "image-feature": "detectFaces",
         "lang": "en",
-        "x": 830,
-        "y": 460,
+        "x": 670,
+        "y": 440,
         "wires": [
             [
                 "93a96cea.cb6ae",
@@ -111,7 +110,7 @@
         "id": "ad27a090.f3bce8",
         "type": "inject",
         "z": "81e8b390.383d",
-        "name": "",
+        "name": "Test Picture",
         "topic": "",
         "payload": "https://tmssl.akamaized.net/images/portrait/originals/296622-1447228327.jpg",
         "payloadType": "str",
@@ -119,8 +118,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 670,
-        "y": 520,
+        "x": 630,
+        "y": 500,
         "wires": [
             [
                 "52629e97.df1"
@@ -162,8 +161,8 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": false,
-        "x": 360,
-        "y": 380,
+        "x": 680,
+        "y": 280,
         "wires": [
             [
                 "ff9d6969.817ea8"
@@ -178,8 +177,8 @@
         "func": "var newMsg = { payload: msg.payload };\nnewMsg.topic= \"insert into Face(MinAge,MaxAge,Gender) values (\"+msg.result.images[0].faces[0].age.min+\",\"+msg.result.images[0].faces[0].age.max+\",+'\"+msg.result.images[0].faces[0].gender.gender_label+\"')\";\nreturn newMsg;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 1030,
-        "y": 460,
+        "x": 890,
+        "y": 440,
         "wires": [
             [
                 "fb5899bd.5bcb3"
@@ -191,13 +190,13 @@
         "type": "debug",
         "z": "81e8b390.383d",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 1130,
-        "y": 540,
+        "x": 1050,
+        "y": 520,
         "wires": []
     },
     {
@@ -206,8 +205,8 @@
         "z": "81e8b390.383d",
         "mydb": "6a01d88c.77289",
         "name": "",
-        "x": 1170,
-        "y": 460,
+        "x": 1030,
+        "y": 440,
         "wires": [
             [
                 "41d5c341.7dabd4"
@@ -219,7 +218,7 @@
         "type": "debug",
         "z": "81e8b390.383d",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -235,8 +234,8 @@
         "z": "81e8b390.383d",
         "mydb": "817c56c1.e8838",
         "name": "",
-        "x": 810,
-        "y": 280,
+        "x": 630,
+        "y": 220,
         "wires": [
             [
                 "7356e602.0f405"
@@ -251,8 +250,8 @@
         "func": "var newMsg = { payload: msg.payload };\nnewMsg.topic= \"delete from Face\";\nreturn newMsg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 640,
-        "y": 280,
+        "x": 420,
+        "y": 220,
         "wires": [
             [
                 "5c55cf6a.82ff28"
@@ -269,8 +268,8 @@
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 970,
-        "y": 280,
+        "x": 790,
+        "y": 220,
         "wires": []
     },
     {
@@ -285,8 +284,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 480,
-        "y": 140,
+        "x": 400,
+        "y": 160,
         "wires": [
             [
                 "377abd25.848022"
@@ -304,7 +303,7 @@
         "timer": "",
         "oldrc": false,
         "name": "Delete Picture",
-        "x": 420,
+        "x": 440,
         "y": 300,
         "wires": [
             [
