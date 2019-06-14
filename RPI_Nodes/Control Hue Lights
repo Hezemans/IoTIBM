@@ -1,12 +1,5 @@
 [
     {
-        "id": "1733c3ee.9cf73c",
-        "type": "tab",
-        "label": "Flow 1",
-        "disabled": false,
-        "info": ""
-    },
-    {
         "id": "3f5f4bd9.0c8014",
         "type": "inject",
         "z": "1733c3ee.9cf73c",
@@ -434,7 +427,8 @@
         "y": 40,
         "wires": [
             [
-                "9b102452.4cb298"
+                "9b102452.4cb298",
+                "d4792cd0.685e88"
             ]
         ]
     },
@@ -472,6 +466,811 @@
         ]
     },
     {
+        "id": "4c070c20.0d4824",
+        "type": "function",
+        "z": "1733c3ee.9cf73c",
+        "name": "Recorrer json",
+        "func": "var hora = msg.eltiempo.slice(11,13);\nmsg.eltiempo = hora;\n//return msg;\n\n//msg.payload[0].observations[(parseInt(msg.eltiempo))];\n    \nreturn {payload: msg.payload[0].observations[(parseInt(msg.eltiempo))]};\n//return payload[0].observations[parseInt(msg.eltiempo).wx_phrase];",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1410.5000305175781,
+        "y": 519.2222900390625,
+        "wires": [
+            [
+                "e5811f47.f9fa3",
+                "3fb8c5ed.acc1c2"
+            ]
+        ]
+    },
+    {
+        "id": "3fb8c5ed.acc1c2",
+        "type": "function",
+        "z": "1733c3ee.9cf73c",
+        "name": "Check",
+        "func": "var weather = {payload: msg.payload.wx_phrase};\nreturn weather;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1606.0557250976562,
+        "y": 519.8887939453125,
+        "wires": [
+            [
+                "e78131f1.392b28",
+                "9a434ae8.f56cb"
+            ]
+        ]
+    },
+    {
+        "id": "e5811f47.f9fa3",
+        "type": "debug",
+        "z": "1733c3ee.9cf73c",
+        "name": "Recorrer json",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 1412.7221984863281,
+        "y": 588.3334350585938,
+        "wires": []
+    },
+    {
+        "id": "6b608963.44b948",
+        "type": "debug",
+        "z": "1733c3ee.9cf73c",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 1175.6666564941406,
+        "y": 579.6666870117188,
+        "wires": []
+    },
+    {
+        "id": "e78131f1.392b28",
+        "type": "debug",
+        "z": "1733c3ee.9cf73c",
+        "name": "check",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 1600.9999389648438,
+        "y": 583.3333740234375,
+        "wires": []
+    },
+    {
+        "id": "9a434ae8.f56cb",
+        "type": "switch",
+        "z": "1733c3ee.9cf73c",
+        "name": "Options",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "Tornado",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Tropical Storm",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Hurricane",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Strong Storms",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Thunder and Hail",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Mixed Rain & Hail",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Isolated Thunderstorms",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Thunderstorms",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Scattered Thunderstorms",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Rain to Snow Showers",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Rain / Sleet",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Wintry Mix Snow / Sleet",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Freezing Drizzle",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Drizzle",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Freezing Rain",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Light Rain",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Rain",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Scattered Showers",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Scattered Thunderstorms",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Scattered Flurries",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Light Snow",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Blowing / Drifting Snow",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Snow",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Hail",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Sleet",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Scattered Snow Showers",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Heavy Snow",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Scattered Snow Showers",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Foggy",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Haze / Windy",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Smoke / Windy",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Breezy",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Blowing Spray / Windy",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Frigid / Ice Crystals",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Cloudy",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Mostly Cloudy",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Partly Cloudy",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Blizzard",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Scattered Showers",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Shallow Fog",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Clear",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Sunny",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Hot",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Fair",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Blowing Dust / Sandstorm",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Showers in the Vicinity",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Fog",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 47,
+        "x": 1840,
+        "y": 620,
+        "wires": [
+            [
+                "a742fd22.16eb68"
+            ],
+            [
+                "a742fd22.16eb68"
+            ],
+            [
+                "a742fd22.16eb68"
+            ],
+            [
+                "a742fd22.16eb68"
+            ],
+            [
+                "a742fd22.16eb68"
+            ],
+            [
+                "a742fd22.16eb68"
+            ],
+            [
+                "a742fd22.16eb68"
+            ],
+            [
+                "a742fd22.16eb68"
+            ],
+            [
+                "a742fd22.16eb68"
+            ],
+            [
+                "357fb3f1.87a5b4"
+            ],
+            [
+                "357fb3f1.87a5b4"
+            ],
+            [
+                "357fb3f1.87a5b4"
+            ],
+            [
+                "357fb3f1.87a5b4"
+            ],
+            [
+                "357fb3f1.87a5b4"
+            ],
+            [
+                "357fb3f1.87a5b4"
+            ],
+            [
+                "357fb3f1.87a5b4"
+            ],
+            [
+                "357fb3f1.87a5b4"
+            ],
+            [
+                "357fb3f1.87a5b4"
+            ],
+            [
+                "357fb3f1.87a5b4"
+            ],
+            [
+                "b1558c04.9713"
+            ],
+            [
+                "b1558c04.9713"
+            ],
+            [
+                "b1558c04.9713"
+            ],
+            [
+                "b1558c04.9713"
+            ],
+            [
+                "b1558c04.9713"
+            ],
+            [
+                "b1558c04.9713"
+            ],
+            [
+                "b1558c04.9713"
+            ],
+            [
+                "b1558c04.9713"
+            ],
+            [
+                "b1558c04.9713"
+            ],
+            [
+                "62399a50.d41ac4"
+            ],
+            [
+                "62399a50.d41ac4"
+            ],
+            [
+                "62399a50.d41ac4"
+            ],
+            [
+                "62399a50.d41ac4"
+            ],
+            [
+                "62399a50.d41ac4"
+            ],
+            [
+                "62399a50.d41ac4"
+            ],
+            [
+                "89a57c8c.2e6028"
+            ],
+            [
+                "89a57c8c.2e6028"
+            ],
+            [
+                "89a57c8c.2e6028"
+            ],
+            [
+                "62399a50.d41ac4"
+            ],
+            [
+                "62399a50.d41ac4"
+            ],
+            [
+                "62399a50.d41ac4"
+            ],
+            [
+                "b1479390.b9c438"
+            ],
+            [
+                "b1479390.b9c438"
+            ],
+            [
+                "b1479390.b9c438"
+            ],
+            [
+                "b1479390.b9c438"
+            ],
+            [
+                "b1479390.b9c438"
+            ],
+            [
+                "357fb3f1.87a5b4"
+            ],
+            [
+                "62399a50.d41ac4"
+            ]
+        ]
+    },
+    {
+        "id": "a742fd22.16eb68",
+        "type": "template",
+        "z": "1733c3ee.9cf73c",
+        "name": "Storm/Red",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\n    \"on\":true,\n    \"sat\":254,\n    \"bri\":254,\n    \"hue\":65000\n}\n",
+        "output": "str",
+        "x": 2070,
+        "y": 180,
+        "wires": [
+            [
+                "9b102452.4cb298",
+                "73d3db44.83f4b4"
+            ]
+        ]
+    },
+    {
+        "id": "357fb3f1.87a5b4",
+        "type": "template",
+        "z": "1733c3ee.9cf73c",
+        "name": "Rain/Blue",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\n    \"on\":true,\n    \"bri\": 254,\n\t\"sat\": 254,\n\t\"hue\": 46543\n}\n",
+        "output": "str",
+        "x": 2080,
+        "y": 380,
+        "wires": [
+            [
+                "9b102452.4cb298",
+                "73d3db44.83f4b4"
+            ]
+        ]
+    },
+    {
+        "id": "b1558c04.9713",
+        "type": "template",
+        "z": "1733c3ee.9cf73c",
+        "name": "Snow/Light Blue",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\n    \"on\":true,\n    \"sat\":200,\n    \"bri\":254,\n    \"hue\":40000\n}",
+        "output": "str",
+        "x": 2100,
+        "y": 300,
+        "wires": [
+            [
+                "9b102452.4cb298",
+                "73d3db44.83f4b4"
+            ]
+        ]
+    },
+    {
+        "id": "62399a50.d41ac4",
+        "type": "template",
+        "z": "1733c3ee.9cf73c",
+        "name": "Fog/White",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\n    \"on\":true,\n    \"sat\":1,\n    \"bri\":180,\n    \"hue\":3000\n}",
+        "output": "str",
+        "x": 2150,
+        "y": 660,
+        "wires": [
+            [
+                "9b102452.4cb298",
+                "73d3db44.83f4b4"
+            ]
+        ]
+    },
+    {
+        "id": "b1479390.b9c438",
+        "type": "template",
+        "z": "1733c3ee.9cf73c",
+        "name": "Sunny/Yellow",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\n    \"on\":true,\n    \"bri\": 254,\n    \"sat\": 254,\n\t\"hue\": 10000\n\t\n}",
+        "output": "str",
+        "x": 2100,
+        "y": 820,
+        "wires": [
+            [
+                "9b102452.4cb298",
+                "73d3db44.83f4b4"
+            ]
+        ]
+    },
+    {
+        "id": "3c0eba61.57226e",
+        "type": "inject",
+        "z": "1733c3ee.9cf73c",
+        "name": "LIGHT BLUE",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 2552.222412109375,
+        "y": 304.99998474121094,
+        "wires": [
+            [
+                "b1558c04.9713"
+            ]
+        ]
+    },
+    {
+        "id": "89a57c8c.2e6028",
+        "type": "template",
+        "z": "1733c3ee.9cf73c",
+        "name": "Cloud/White",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\n    \"on\":true,\n    \"sat\":5,\n    \"bri\":254,\n    \"hue\":55555\n}\n",
+        "output": "str",
+        "x": 2090,
+        "y": 480,
+        "wires": [
+            [
+                "9b102452.4cb298",
+                "73d3db44.83f4b4"
+            ]
+        ]
+    },
+    {
+        "id": "33325cb5.ced7bc",
+        "type": "inject",
+        "z": "1733c3ee.9cf73c",
+        "name": "RED",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 2518.8890380859375,
+        "y": 262.2222137451172,
+        "wires": [
+            [
+                "a742fd22.16eb68"
+            ]
+        ]
+    },
+    {
+        "id": "2c24884f.31dca",
+        "type": "inject",
+        "z": "1733c3ee.9cf73c",
+        "name": "YELLOW",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 2537.222412109375,
+        "y": 493.8888702392578,
+        "wires": [
+            [
+                "b1479390.b9c438"
+            ]
+        ]
+    },
+    {
+        "id": "42783873.de8ae8",
+        "type": "inject",
+        "z": "1733c3ee.9cf73c",
+        "name": "WHITE RARE",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 2548.8890380859375,
+        "y": 450.55555725097656,
+        "wires": [
+            [
+                "62399a50.d41ac4"
+            ]
+        ]
+    },
+    {
+        "id": "fc9a851d.4bffc8",
+        "type": "inject",
+        "z": "1733c3ee.9cf73c",
+        "name": "WHITE",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 2525.5556640625,
+        "y": 402.2222137451172,
+        "wires": [
+            [
+                "89a57c8c.2e6028"
+            ]
+        ]
+    },
+    {
+        "id": "8010f7b8.3bed2",
+        "type": "inject",
+        "z": "1733c3ee.9cf73c",
+        "name": "BLUE",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 2527.222412109375,
+        "y": 357.2222137451172,
+        "wires": [
+            [
+                "357fb3f1.87a5b4"
+            ]
+        ]
+    },
+    {
+        "id": "f3e991bf.305f7",
+        "type": "moment",
+        "z": "1733c3ee.9cf73c",
+        "name": "",
+        "topic": "",
+        "input": "tiempo",
+        "inputType": "msg",
+        "inTz": "CET",
+        "adjAmount": "2",
+        "adjType": "hours",
+        "adjDir": "add",
+        "format": "",
+        "locale": "en_US",
+        "output": "eltiempo",
+        "outputType": "msg",
+        "outTz": "CET",
+        "x": 1182.0555725097656,
+        "y": 520.4445190429688,
+        "wires": [
+            [
+                "4c070c20.0d4824",
+                "6b608963.44b948"
+            ]
+        ]
+    },
+    {
+        "id": "9dae0d42.e75948",
+        "type": "cloudant in",
+        "z": "1733c3ee.9cf73c",
+        "name": "test",
+        "cloudant": "f70e8d45.27a858",
+        "database": "test",
+        "service": "_ext_",
+        "search": "_all_",
+        "design": "",
+        "index": "",
+        "x": 1210,
+        "y": 460,
+        "wires": [
+            [
+                "f3e991bf.305f7"
+            ]
+        ]
+    },
+    {
+        "id": "9b6f2065.e07a3",
+        "type": "inject",
+        "z": "1733c3ee.9cf73c",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "300",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 1050,
+        "y": 460,
+        "wires": [
+            [
+                "9dae0d42.e75948"
+            ]
+        ]
+    },
+    {
+        "id": "d4792cd0.685e88",
+        "type": "debug",
+        "z": "1733c3ee.9cf73c",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 1080,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "73d3db44.83f4b4",
+        "type": "debug",
+        "z": "1733c3ee.9cf73c",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 2230,
+        "y": 80,
+        "wires": []
+    },
+    {
         "id": "5c13f417.02dc7c",
         "type": "ibmiot",
         "z": "",
@@ -481,5 +1280,12 @@
         "cleansession": true,
         "appId": "",
         "shared": false
+    },
+    {
+        "id": "f70e8d45.27a858",
+        "type": "cloudant",
+        "z": "",
+        "host": "https://92ad5449-4112-4837-81f7-b57885f36296-bluemix:e4e728aefc87dac955e7579957162e7a3f6276f76ad2dbe231b98f0e19a7140d@92ad5449-4112-4837-81f7-b57885f36296-bluemix.cloudantnosqldb.appdomain.cloud",
+        "name": ""
     }
 ]
