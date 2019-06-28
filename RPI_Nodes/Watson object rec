@@ -1,0 +1,149 @@
+[
+    {
+        "id": "66ea9319.a7c9a4",
+        "type": "tab",
+        "label": "Object Recognition",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "c0bcd625.af834",
+        "type": "exec",
+        "z": "66ea9319.a7c9a4",
+        "command": "sudo raspistill -o /var/www/html/fotos/alle.jpg -q 15 -md 4 -t 5000 -br 50 -hf -vf",
+        "addpay": false,
+        "append": "",
+        "useSpawn": "",
+        "timer": "",
+        "oldrc": false,
+        "name": "take picture",
+        "x": 390,
+        "y": 240,
+        "wires": [
+            [
+                "62d91445.3de544"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "4d8a09f6.c6182",
+        "type": "inject",
+        "z": "66ea9319.a7c9a4",
+        "name": "hacer foto",
+        "topic": "",
+        "payload": "https://movilidadelectrica.com/wp-content/uploads/2016/06/Tesla-Model-3-plata-lateral.jpg",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 200,
+        "y": 240,
+        "wires": [
+            [
+                "c0bcd625.af834"
+            ]
+        ]
+    },
+    {
+        "id": "9f1e4f66.e49c88",
+        "type": "visual-recognition-v3",
+        "z": "66ea9319.a7c9a4",
+        "name": "",
+        "vr-service-endpoint": "https://gateway.watsonplatform.net/visual-recognition/api",
+        "image-feature": "classifyImage",
+        "lang": "en",
+        "x": 450,
+        "y": 360,
+        "wires": [
+            [
+                "74395dd1.ce42d4",
+                "563d2083.d3d79"
+            ]
+        ]
+    },
+    {
+        "id": "563d2083.d3d79",
+        "type": "debug",
+        "z": "66ea9319.a7c9a4",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 890,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "62d91445.3de544",
+        "type": "delay",
+        "z": "66ea9319.a7c9a4",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "3",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 240,
+        "y": 300,
+        "wires": [
+            [
+                "4b6af66f.fd78e"
+            ]
+        ]
+    },
+    {
+        "id": "4b6af66f.fd78e",
+        "type": "file in",
+        "z": "66ea9319.a7c9a4",
+        "name": "Buffer image",
+        "filename": "/var/www/html/fotos/alle.jpg",
+        "format": "",
+        "sendError": true,
+        "x": 430,
+        "y": 300,
+        "wires": [
+            [
+                "9f1e4f66.e49c88"
+            ]
+        ]
+    },
+    {
+        "id": "a9a699f.cfaeee8",
+        "type": "http in",
+        "z": "66ea9319.a7c9a4",
+        "name": "",
+        "url": "/foto",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 220,
+        "y": 180,
+        "wires": [
+            [
+                "c0bcd625.af834"
+            ]
+        ]
+    },
+    {
+        "id": "74395dd1.ce42d4",
+        "type": "http response",
+        "z": "66ea9319.a7c9a4",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 770,
+        "y": 240,
+        "wires": []
+    }
+]
