@@ -1,0 +1,330 @@
+[
+    {
+        "id": "5ada68f8.dff5c8",
+        "type": "tab",
+        "label": "FacialRec2",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "cf8ffff6.ceeaf",
+        "type": "exec",
+        "z": "5ada68f8.dff5c8",
+        "command": "sudo raspistill -o /var/www/html/fotos/alle.jpg -q 15 -md 4 -t 5000 -br 50 -hf -vf",
+        "addpay": false,
+        "append": "",
+        "useSpawn": "",
+        "timer": "",
+        "oldrc": false,
+        "name": "take picture",
+        "x": 410,
+        "y": 320,
+        "wires": [
+            [
+                "b3173004.7e212"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "b3173004.7e212",
+        "type": "delay",
+        "z": "5ada68f8.dff5c8",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "6",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 660,
+        "y": 300,
+        "wires": [
+            [
+                "c77bd681.e60568"
+            ]
+        ]
+    },
+    {
+        "id": "c77bd681.e60568",
+        "type": "file in",
+        "z": "5ada68f8.dff5c8",
+        "name": "Buffer image",
+        "filename": "/var/www/html/fotos/alle.jpg",
+        "format": "",
+        "sendError": true,
+        "x": 410,
+        "y": 380,
+        "wires": [
+            [
+                "6415098e.0d00e"
+            ]
+        ]
+    },
+    {
+        "id": "1201deb6.d0a8e1",
+        "type": "http in",
+        "z": "5ada68f8.dff5c8",
+        "name": "",
+        "url": "/cara2",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 240,
+        "wires": [
+            [
+                "b9fee4ac.49515",
+                "d6d3da99.f371d"
+            ]
+        ]
+    },
+    {
+        "id": "e84a490.0f3f6b8",
+        "type": "http response",
+        "z": "5ada68f8.dff5c8",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 870,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "e8d7cba5.7da368",
+        "type": "inject",
+        "z": "5ada68f8.dff5c8",
+        "name": "Test Picture 2",
+        "topic": "",
+        "payload": "https://previews.123rf.com/images/marctran/marctran1607/marctran160700053/61442686-dos-personas-de-pie-con-las-manos-en-la-parte-superior-entre-s%C3%AD-y-sonriendo-aislado.jpg",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 610,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c7f4ee39.8bb09",
+        "type": "inject",
+        "z": "5ada68f8.dff5c8",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 120,
+        "y": 320,
+        "wires": [
+            [
+                "d6d3da99.f371d",
+                "b9fee4ac.49515"
+            ]
+        ]
+    },
+    {
+        "id": "aaf6bb74.81715",
+        "type": "delay",
+        "z": "5ada68f8.dff5c8",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "10",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 660,
+        "y": 220,
+        "wires": [
+            [
+                "cf8ffff6.ceeaf"
+            ]
+        ]
+    },
+    {
+        "id": "efcd257d.dc36e",
+        "type": "debug",
+        "z": "5ada68f8.dff5c8",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 1030,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "b9fee4ac.49515",
+        "type": "function",
+        "z": "5ada68f8.dff5c8",
+        "name": "Delete from DB",
+        "func": "var newMsg = { payload: msg.payload };\nnewMsg.topic= \"delete from Face2\";\nreturn newMsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 400,
+        "y": 160,
+        "wires": [
+            [
+                "27360ffa.00b6a8"
+            ]
+        ]
+    },
+    {
+        "id": "90ed02e7.8a6eb",
+        "type": "debug",
+        "z": "5ada68f8.dff5c8",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 770,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "1db04539.a43403",
+        "type": "inject",
+        "z": "5ada68f8.dff5c8",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 380,
+        "y": 100,
+        "wires": [
+            [
+                "b9fee4ac.49515"
+            ]
+        ]
+    },
+    {
+        "id": "d6d3da99.f371d",
+        "type": "exec",
+        "z": "5ada68f8.dff5c8",
+        "command": "sudo rm -r /var/www/html/fotos/alle.jpg",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "Delete Picture",
+        "x": 420,
+        "y": 240,
+        "wires": [
+            [
+                "aaf6bb74.81715"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "da55b1c3.13b428",
+        "type": "debug",
+        "z": "5ada68f8.dff5c8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 990,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "6ee9b568.6f5fb4",
+        "type": "function",
+        "z": "5ada68f8.dff5c8",
+        "name": "Info2",
+        "func": "var newMsg = { payload: msg.payload };\nnewMsg.topic= \"insert into Face2(MinAge,MaxAge,Gender) values (\"+msg.result.images[0].faces[0].age.min+\",\"+msg.result.images[0].faces[0].age.max+\",+'\"+msg.result.images[0].faces[0].gender.gender_label+\"'), (\"+msg.result.images[0].faces[1].age.min+\",\"+msg.result.images[0].faces[1].age.max+\",+'\"+msg.result.images[0].faces[1].gender.gender_label+\"')\";\nreturn newMsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 850,
+        "y": 380,
+        "wires": [
+            [
+                "da55b1c3.13b428",
+                "287e3962.c10de6"
+            ]
+        ]
+    },
+    {
+        "id": "27360ffa.00b6a8",
+        "type": "mysql",
+        "z": "5ada68f8.dff5c8",
+        "mydb": "5b821f2d.df5c68",
+        "name": "",
+        "x": 590,
+        "y": 160,
+        "wires": [
+            [
+                "90ed02e7.8a6eb"
+            ]
+        ]
+    },
+    {
+        "id": "287e3962.c10de6",
+        "type": "mysql",
+        "z": "5ada68f8.dff5c8",
+        "mydb": "5b821f2d.df5c68",
+        "name": "",
+        "x": 990,
+        "y": 380,
+        "wires": [
+            [
+                "efcd257d.dc36e"
+            ]
+        ]
+    },
+    {
+        "id": "6415098e.0d00e",
+        "type": "visual-recognition-v3",
+        "z": "5ada68f8.dff5c8",
+        "name": "",
+        "vr-service-endpoint": "https://gateway.watsonplatform.net/visual-recognition/api",
+        "image-feature": "detectFaces",
+        "lang": "en",
+        "x": 630,
+        "y": 380,
+        "wires": [
+            [
+                "6ee9b568.6f5fb4"
+            ]
+        ]
+    },
+    {
+        "id": "5b821f2d.df5c68",
+        "type": "MySQLdatabase",
+        "z": "",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "db": "face2",
+        "tz": ""
+    }
+]
