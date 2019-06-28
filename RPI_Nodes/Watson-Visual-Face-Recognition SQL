@@ -1,5 +1,12 @@
 [
     {
+        "id": "81e8b390.383d",
+        "type": "tab",
+        "label": "Facial Recognition",
+        "disabled": false,
+        "info": ""
+    },
+    {
         "id": "ff9d6969.817ea8",
         "type": "exec",
         "z": "81e8b390.383d",
@@ -110,9 +117,9 @@
         "id": "ad27a090.f3bce8",
         "type": "inject",
         "z": "81e8b390.383d",
-        "name": "Test Picture",
+        "name": "Test Picture 1",
         "topic": "",
-        "payload": "https://tmssl.akamaized.net/images/portrait/originals/296622-1447228327.jpg",
+        "payload": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Alonso_2016.jpg/220px-Alonso_2016.jpg",
         "payloadType": "str",
         "repeat": "",
         "crontab": "",
@@ -142,7 +149,8 @@
         "y": 380,
         "wires": [
             [
-                "a2d28233.d6f9a8"
+                "a2d28233.d6f9a8",
+                "377abd25.848022"
             ]
         ]
     },
@@ -174,14 +182,15 @@
         "type": "function",
         "z": "81e8b390.383d",
         "name": "Info",
-        "func": "var newMsg = { payload: msg.payload };\nnewMsg.topic= \"insert into Face(MinAge,MaxAge,Gender) values (\"+msg.result.images[0].faces[0].age.min+\",\"+msg.result.images[0].faces[0].age.max+\",+'\"+msg.result.images[0].faces[0].gender.gender_label+\"')\";\nreturn newMsg;\n",
+        "func": "var newMsg = { payload: msg.payload };\nnewMsg.topic= \"insert into Face(MinAge,MaxAge,Gender) values (\"+msg.result.images[0].faces[0].age.min+\",\"+msg.result.images[0].faces[0].age.max+\",+'\"+msg.result.images[0].faces[0].gender.gender_label+\"')\";\nreturn newMsg;",
         "outputs": 1,
         "noerr": 0,
         "x": 890,
         "y": 440,
         "wires": [
             [
-                "fb5899bd.5bcb3"
+                "70c0b7bf.6066d8",
+                "e19a2925.70ff"
             ]
         ]
     },
@@ -200,25 +209,11 @@
         "wires": []
     },
     {
-        "id": "fb5899bd.5bcb3",
-        "type": "mysql",
-        "z": "81e8b390.383d",
-        "mydb": "6a01d88c.77289",
-        "name": "",
-        "x": 1030,
-        "y": 440,
-        "wires": [
-            [
-                "41d5c341.7dabd4"
-            ]
-        ]
-    },
-    {
         "id": "f7301c33.47cdf8",
         "type": "debug",
         "z": "81e8b390.383d",
         "name": "",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -227,20 +222,6 @@
         "x": 870,
         "y": 540,
         "wires": []
-    },
-    {
-        "id": "5c55cf6a.82ff28",
-        "type": "mysql",
-        "z": "81e8b390.383d",
-        "mydb": "817c56c1.e8838",
-        "name": "",
-        "x": 630,
-        "y": 220,
-        "wires": [
-            [
-                "7356e602.0f405"
-            ]
-        ]
     },
     {
         "id": "377abd25.848022",
@@ -254,7 +235,7 @@
         "y": 220,
         "wires": [
             [
-                "5c55cf6a.82ff28"
+                "d6119a99.64c4e"
             ]
         ]
     },
@@ -314,16 +295,50 @@
         ]
     },
     {
-        "id": "6a01d88c.77289",
-        "type": "MySQLdatabase",
-        "z": "",
-        "host": "127.0.0.1",
-        "port": "3306",
-        "db": "face",
-        "tz": ""
+        "id": "70c0b7bf.6066d8",
+        "type": "debug",
+        "z": "81e8b390.383d",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 1010,
+        "y": 380,
+        "wires": []
     },
     {
-        "id": "817c56c1.e8838",
+        "id": "d6119a99.64c4e",
+        "type": "mysql",
+        "z": "81e8b390.383d",
+        "mydb": "6a01d88c.77289",
+        "name": "",
+        "x": 590,
+        "y": 220,
+        "wires": [
+            [
+                "7356e602.0f405"
+            ]
+        ]
+    },
+    {
+        "id": "e19a2925.70ff",
+        "type": "mysql",
+        "z": "81e8b390.383d",
+        "mydb": "6a01d88c.77289",
+        "name": "",
+        "x": 1030,
+        "y": 440,
+        "wires": [
+            [
+                "41d5c341.7dabd4"
+            ]
+        ]
+    },
+    {
+        "id": "6a01d88c.77289",
         "type": "MySQLdatabase",
         "z": "",
         "host": "127.0.0.1",
